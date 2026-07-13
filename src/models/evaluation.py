@@ -48,7 +48,7 @@ def eval_model(
     print(f"Prediction saved under '{pred_path}'.")
 
     # Save metrics
-    metrics_path = Path(metrics_dir) / "metrics.json"
+    metrics_path = Path(metrics_dir) / "scores.json"
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=4)
     print(f"Prediction metrics saved under '{metrics_path}'.")
