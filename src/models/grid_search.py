@@ -13,7 +13,7 @@ from sklearn.model_selection import RandomizedSearchCV
 
 def perform_gridsearch(
         processed_data_dir: str = "./data/processed_data", 
-        model_dir: str = "./models",
+        model_dir: str = "./models/models",
         n_trials: int = 50,
         random_state: int = 42
         ) -> None:
@@ -54,7 +54,9 @@ def perform_gridsearch(
 
     # Save best parameters
     best_params = search.best_params_
-    params_path = Path(model_dir) / "best_params.pkl"
+    model_dir = Path(model_dir)
+    model_dir.mkdir(parents=True, exist_ok=True)
+    params_path = model_dir / "best_params.pkl"
     joblib.dump(best_params, params_path)
     print(f"Best parameters saved under '{params_path}'.")
 

@@ -11,7 +11,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 def train_model(       
         processed_data_dir: str = "./data/processed_data", 
-        model_dir: str = "./models",
+        model_dir: str = "./models/models",
         random_state: int = 42
         ) -> None:
     
@@ -36,7 +36,9 @@ def train_model(
     model.fit(X_train, y_train)
 
     # Save model
-    model_path = Path(model_dir) / "model.pkl"
+    model_dir = Path(model_dir)
+    model_dir.mkdir(parents=True, exist_ok=True)
+    model_path = model_dir / "model.pkl"
     joblib.dump(model, model_path)
     print(f"Trained model saved under '{model_path}'.")
 

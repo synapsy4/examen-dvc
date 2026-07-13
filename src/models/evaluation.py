@@ -12,8 +12,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
 def eval_model(
         processed_data_dir: str = "./data/processed_data", 
-        model_dir: str = "./models",
-        prediction_dir: str = "./data",
+        model_dir: str = "./models/models",
+        prediction_dir: str = "./models/data",
         metrics_dir: str = "./metrics"
         ) -> None:
     
@@ -43,7 +43,9 @@ def eval_model(
         "target": y_test,
         "prediction": y_pred
     })
-    pred_path = Path(prediction_dir) / "prediction.csv"
+    prediction_dir = Path(prediction_dir)
+    prediction_dir.mkdir(parents=True, exist_ok=True)
+    pred_path = prediction_dir / "prediction.csv"
     prediction.to_csv(pred_path, index=False)
     print(f"Prediction saved under '{pred_path}'.")
 
